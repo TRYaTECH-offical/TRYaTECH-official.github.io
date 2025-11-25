@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRYaTECH Inspection Services</title>
+  <meta name="description" content="TRYaTECH independent construction and commercial inspection services for developers, lenders, and property owners in Florida." />
+
+  <!-- Basic styling (self-contained so it looks good even without your main CSS) -->
+  <style>
+    :root {
+      --bg-dark: #05060a;
+      --bg-light: #0b0d14;
+      --accent: #1f8fff;
+      --accent-soft: rgba(31, 143, 255, 0.15);
+      --text-main: #f1f5f9;
+      --text-muted: #9ca3af;
+      --border-subtle: #1f2933;
+      --card-bg: #0f172a;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.5);
+      --radius-lg: 14px;
+      --radius-full: 999px;
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header / nav */
+    header {
+      border-bottom: 1px solid var(--border-subtle);
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8));
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: radial-gradient(circle at top left, #38bdf8, #1f2937 55%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8);
+    }
+
+    .brand span {
+      color: #e5e7eb;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.16em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.16s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+      border-color: rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .nav-links a.nav-cta {
+      background: linear-gradient(135deg, var(--accent), #38bdf8);
+      color: #0b1020;
+      font-weight: 600;
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.7);
+    }
+
+    .nav-links a.nav-cta:hover {
+      filter: brightness(1.05);
+      transform: translateY(-0.5px);
+      box-shadow: 0 14px 40px rgba(37, 99, 235, 0.9);
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+    }
+
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 2.25rem;
+      align-items: center;
+      padding-top: 3rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: var(--radius-full);
+      background: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: #bae6fd;
+      font-size: 0.75rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 3vw + 1.4rem, 3rem);
+      line-height: 1.1;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero h1 span.accent {
+      background: linear-gradient(135deg, #60a5fa, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 34rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-keypoints {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem 1.25rem;
+      font-size: 0.86rem;
+      color: #cbd5f5;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-keypoints span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-keypoints svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.16s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #38bdf8);
+      color: #020617;
+      font-weight: 600;
+      box-shadow: 0 12px 35px rgba(37, 99, 235, 0.8);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.04);
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.95);
+      text-decoration: none;
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.6);
+      text-decoration: none;
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 1.4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(59, 130, 246, 0.23), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-card-metric span.label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .hero-card-metric span.value {
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .hero-card-divider {
+      height: 1px;
+      background: linear-gradient(to right, rgba(148, 163, 184, 0), rgba(148, 163, 184, 0.8), rgba(148, 163, 184, 0));
+      margin: 0.6rem 0 0.8rem;
+    }
+
+    .hero-card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      font-size: 0.72rem;
+    }
+
+    .badge {
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    /* Sections */
+    .section-title {
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pill {
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 1rem 1.1rem;
+      box-shadow: 0 18px 30px rgba(15, 23, 42, 0.8);
+      font-size: 0.88rem;
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.35rem;
+      color: #e5e7eb;
+      font-size: 0.86rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .card ul li::before {
+      content: "•";
+      color: #38bdf8;
+      font-size: 1rem;
+      line-height: 1;
+      margin-top: 0.05rem;
+    }
+
+    .highlight {
+      color: #e5e7eb;
+    }
+
+    /* Contact section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 1.75rem;
+    }
+
+    .contact-details p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-info-row span.label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    .contact-info-row a {
+      font-weight: 500;
+    }
+
+    .contact-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .contact-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      font-size: 0.86rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .contact-box h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-box p {
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 1.1rem 1.25rem 1.4rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .hero-keypoints {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .grid.two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav-container {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- Header / nav -->
+  <header>
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <div class="brand-mark">T</div>
+        <span>TRYaTECH<br /><small>Inspection Services</small></span>
+      </a>
+
+      <nav class="nav-links">
+        <!-- Update these hrefs to match your actual file names / paths -->
+        <a href="/">Shop</a>
+        <a href="/about.html">About</a>
+        <a href="/media.html">Media</a>
+        <!-- New active link for inspections -->
+        <a href="/inspections.html" class="nav-cta">Inspection Services</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="section hero">
+      <div>
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          <span>Independent inspections for real projects</span>
+        </div>
+
+        <h1>
+          TRYaTECH <span class="accent">Inspection Services</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Independent construction and commercial property inspections for developers, lenders,
+          and owners in Florida. Fast photo reports, clear checklists, and reliable
+          documentation you can send straight to your bank, investor, or project team.
+        </p>
+
+        <div class="hero-keypoints">
+          <span>
+            <!-- check icon -->
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path fill="currentColor" d="M7.667 14.5 3.5 10.333l1.414-1.414 2.753 2.753 7.419-7.419L16.5 5.667z" />
+            </svg>
+            Commercial inspection experience with national brands
+          </span>
+          <span>
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path fill="currentColor" d="M7.667 14.5 3.5 10.333l1.414-1.414 2.753 2.753 7.419-7.419L16.5 5.667z" />
+            </svg>
+            Same-day photo documentation & PDF reports
+          </span>
+          <span>
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path fill="currentColor" d="M7.667 14.5 3.5 10.333l1.414-1.414 2.753 2.753 7.419-7.419L16.5 5.667z" />
+            </svg>
+            Ideal for banks, hard-money lenders & investors
+          </span>
+          <span>
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path fill="currentColor" d="M7.667 14.5 3.5 10.333l1.414-1.414 2.753 2.753 7.419-7.419L16.5 5.667z" />
+            </svg>
+            Serving Tampa Bay, Bradenton, Ellenton, Sarasota & nearby areas
+          </span>
+        </div>
+
+        <div class="hero-cta-row">
+          <a class="btn btn-primary" href="mailto:youremail@example.com?subject=TRYaTECH%20Inspection%20Request">
+            Request an inspection
+          </a>
+          <a class="btn btn-ghost" href="#contact">
+            See service areas & contact
+          </a>
+        </div>
+        <p class="hero-note">
+          Need a sample report or rate sheet? Include that in your email request and we’ll send it over.
+        </p>
+      </div>
+
+      <!-- Side card -->
+      <aside class="hero-card" aria-label="Service summary">
+        <div class="hero-card-inner">
+          <div class="hero-card-label">Inspection snapshot</div>
+          <div class="hero-card-title">What TRYaTECH inspects</div>
+
+          <div class="hero-card-grid">
+            <div class="hero-card-metric">
+              <span class="label">Construction</span>
+              <span class="value">Progress, punchlist & phase photos</span>
+            </div>
+            <div class="hero-card-metric">
+              <span class="label">Commercial</span>
+              <span class="value">Retail, restaurant & plaza walk-throughs</span>
+            </div>
+            <div class="hero-card-metric">
+              <span class="label">Lenders</span>
+              <span class="value">Draw inspections & rehab verification</span>
+            </div>
+            <div class="hero-card-metric">
+              <span class="label">Investors</span>
+              <span class="value">Before/after & rental turnover photos</span>
+            </div>
+          </div>
+
+          <div class="hero-card-divider"></div>
+
+          <div class="hero-card-badges">
+            <span class="badge">Independent third-party</span>
+            <span class="badge">Photo-driven reports</span>
+            <span class="badge">Fast turnaround</span>
+            <span class="badge">Florida based</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Who we serve / services -->
+    <section class="section">
+      <h2 class="section-title">Who we work with</h2>
+      <p class="section-subtitle">
+        TRYaTECH focuses on being the extra set of eyes for people who need reliable documentation on real-world assets.
+      </p>
+
+      <div class="pill-row">
+        <span
+
+
